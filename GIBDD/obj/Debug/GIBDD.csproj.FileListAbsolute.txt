@@ -19,3 +19,13 @@ C:\Users\DELL\source\repos\GIBDD\GIBDD\obj\Debug\GIBDD.exe
 C:\Users\DELL\source\repos\GIBDD\GIBDD\obj\Debug\GIBDD.pdb
 C:\Users\DELL\source\repos\GIBDD\GIBDD\obj\Debug\Main\MainPage.g.cs
 C:\Users\DELL\source\repos\GIBDD\GIBDD\obj\Debug\Main\MainPage.baml
+C:\Users\DELL\source\repos\GIBDD\GIBDD\obj\Debug\RegisterAuto\RegisterInfo.g.cs
+C:\Users\DELL\source\repos\GIBDD\GIBDD\obj\Debug\RegisterAuto\RegisterPage.g.cs
+C:\Users\DELL\source\repos\GIBDD\GIBDD\obj\Debug\RegisterAuto\RegisterInfo.baml
+C:\Users\DELL\source\repos\GIBDD\GIBDD\obj\Debug\RegisterAuto\RegisterPage.baml
+C:\Users\DELL\source\repos\GIBDD\GIBDD\obj\Debug\GIBDD_Content.g.cs
+C:\Users\DELL\source\repos\GIBDD\GIBDD\bin\Debug\EntityFramework.dll
+C:\Users\DELL\source\repos\GIBDD\GIBDD\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\DELL\source\repos\GIBDD\GIBDD\bin\Debug\EntityFramework.xml
+C:\Users\DELL\source\repos\GIBDD\GIBDD\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\DELL\source\repos\GIBDD\GIBDD\bin\Debug\ru\EntityFramework.resources.dll

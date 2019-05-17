@@ -1,0 +1,70 @@
+﻿<Page x:Class="GIBDD.RegisterAuto.RegisterPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GIBDD.RegisterAuto"
+      xmlns:wpf="http://schemas.microsoft.com/netfx/2007/xaml/presentation"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="RegisterPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <GroupBox Header="Паспорт*">
+                <wpf:WindowsFormsHost Name="PassportMask" FontSize="30"/>
+            </GroupBox>
+            <GroupBox Header="Имя*" Grid.Row="1">
+                <TextBox Name="FirstName"></TextBox>
+            </GroupBox>
+            <GroupBox Header="Фамилия*" Grid.Row="2">
+                <TextBox Name="LastName"></TextBox>
+            </GroupBox>
+            <GroupBox Header="Отчество*" Grid.Row="3">
+                <TextBox Name="MiddleName"></TextBox>
+            </GroupBox>
+            <GroupBox Header="Дата рождения*" Grid.Row="4">
+                <DatePicker Name="DateOfBirth"></DatePicker>
+            </GroupBox>
+            <GroupBox Header="VIN*" Grid.Row="5">
+                <wpf:WindowsFormsHost Name="VINMask"></wpf:WindowsFormsHost>
+            </GroupBox>
+            <GroupBox Header="ПТС*(Формат 00  AA 000000)" Grid.Row="6" >
+                <wpf:WindowsFormsHost Name="PTSMask"></wpf:WindowsFormsHost>
+            </GroupBox>
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="0.5*"/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.4*"/>
+                </Grid.ColumnDefinitions>
+                <GroupBox Header="Регион">
+                    <ComboBox IsEditable="True" Name="Region" MaxDropDownHeight="200">
+                    </ComboBox>
+                </GroupBox>
+                <Button Grid.Column="1" Click="Clear">Отчистить</Button>
+            </Grid>
+            <Image Grid.Row="1" Source="/GIBDD;component/Resourses/Convertible-Car-Transparent.png"/>
+            <Button Grid.Row="2" VerticalAlignment="Bottom" Click="Acсept">Подтвердиить</Button>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,401 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище GIBDDModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cars">
+    <Key>
+      <PropertyRef Name="IDCar" />
+    </Key>
+    <Property Name="IDCar" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Number" Type="nchar" MaxLength="6" Nullable="false" />
+    <Property Name="Region" Type="bigint" Nullable="false" />
+    <Property Name="VIN" Type="nchar" MaxLength="17" />
+    <Property Name="PTS" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Idcategory" />
+    </Key>
+    <Property Name="Idcategory" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Info" Type="text" />
+  </EntityType>
+  <EntityType Name="Categorylicense">
+    <Key>
+      <PropertyRef Name="IDCategorylicense" />
+    </Key>
+    <Property Name="IDCategorylicense" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDCategory" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="IDlicense" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="District">
+    <Key>
+      <PropertyRef Name="IDDistrict" />
+    </Key>
+    <Property Name="IDDistrict" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DriverCars">
+    <Key>
+      <PropertyRef Name="IDDriverCars" />
+    </Key>
+    <Property Name="IDDriverCars" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDCar" Type="bigint" />
+    <Property Name="IDDriver" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Drivers">
+    <Key>
+      <PropertyRef Name="IDDrivers" />
+    </Key>
+    <Property Name="IDDrivers" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="MiddleName" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Account" Type="bigint" />
+    <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
+    <Property Name="passport" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Driving license">
+    <Key>
+      <PropertyRef Name="IDDrivinglicense" />
+    </Key>
+    <Property Name="IDDrivinglicense" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="Region" Type="bigint" Nullable="false" />
+    <Property Name="Number" Type="bigint" Nullable="false" />
+    <Property Name="GIBDDNumber" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Driver" Type="bigint" />
+    <Property Name="Photo" Type="varbinary(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Fine">
+    <Key>
+      <PropertyRef Name="FineNuber" />
+    </Key>
+    <Property Name="FineNuber" Type="bigint" Nullable="false" />
+    <Property Name="Date" Type="datetime" Nullable="false" />
+    <Property Name="pay" Type="bit" Nullable="false" />
+    <Property Name="Offence" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FinesDriver">
+    <Key>
+      <PropertyRef Name="IDFineDriver" />
+    </Key>
+    <Property Name="IDFineDriver" Type="bigint" Nullable="false" />
+    <Property Name="IDDriver" Type="bigint" Nullable="false" />
+    <Property Name="IDFine" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Offence">
+    <Key>
+      <PropertyRef Name="IDOffence" />
+    </Key>
+    <Property Name="IDOffence" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OffencePunishment">
+    <Key>
+      <PropertyRef Name="IDFinePunishment" />
+    </Key>
+    <Property Name="IDFinePunishment" Type="bigint" Nullable="false" />
+    <Property Name="IDOffence" Type="bigint" />
+    <Property Name="IDPunishment" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Punishment">
+    <Key>
+      <PropertyRef Name="IDPunishment" />
+    </Key>
+    <Property Name="IDPunishment" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Note" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Region">
+    <Key>
+      <PropertyRef Name="IDRegion" />
+    </Key>
+    <Property Name="IDRegion" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="District" Type="bigint" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="IDRole" />
+    </Key>
+    <Property Name="IDRole" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="IDUser" />
+    </Key>
+    <Property Name="IDUser" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="Role" Type="bigint" />
+  </EntityType>
+  <Association Name="FK_Cars_Region">
+    <End Role="Region" Type="Self.Region" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Cars" Type="Self.Cars" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Region">
+        <PropertyRef Name="IDRegion" />
+      </Principal>
+      <Dependent Role="Cars">
+        <PropertyRef Name="Region" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Categorylicense_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Categorylicense" Type="Self.Categorylicense" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Idcategory" />
+      </Principal>
+      <Dependent Role="Categorylicense">
+        <PropertyRef Name="IDCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Categorylicense_Driving license">
+    <End Role="Driving license" Type="Self.Driving license" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Categorylicense" Type="Self.Categorylicense" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Driving license">
+        <PropertyRef Name="IDDrivinglicense" />
+      </Principal>
+      <Dependent Role="Categorylicense">
+        <PropertyRef Name="IDlicense" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DriverCars_Drivers">
+    <End Role="Drivers" Type="Self.Drivers" Multiplicity="0..1" />
+    <End Role="DriverCars" Type="Self.DriverCars" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Drivers">
+        <PropertyRef Name="IDDrivers" />
+      </Principal>
+      <Dependent Role="DriverCars">
+        <PropertyRef Name="IDDriver" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Drivers_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Drivers" Type="Self.Drivers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="IDUser" />
+      </Principal>
+      <Dependent Role="Drivers">
+        <PropertyRef Name="Account" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Driving license_Drivers">
+    <End Role="Drivers" Type="Self.Drivers" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Driving license" Type="Self.Driving license" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Drivers">
+        <PropertyRef Name="IDDrivers" />
+      </Principal>
+      <Dependent Role="Driving license">
+        <PropertyRef Name="Driver" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Driving license_Region">
+    <End Role="Region" Type="Self.Region" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Driving license" Type="Self.Driving license" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Region">
+        <PropertyRef Name="IDRegion" />
+      </Principal>
+      <Dependent Role="Driving license">
+        <PropertyRef Name="Region" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Fine_Offence">
+    <End Role="Offence" Type="Self.Offence" Multiplicity="1" />
+    <End Role="Fine" Type="Self.Fine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Offence">
+        <PropertyRef Name="IDOffence" />
+      </Principal>
+      <Dependent Role="Fine">
+        <PropertyRef Name="Offence" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FinesDriver_Drivers">
+    <End Role="Drivers" Type="Self.Drivers" Multiplicity="1" />
+    <End Role="FinesDriver" Type="Self.FinesDriver" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Drivers">
+        <PropertyRef Name="IDDrivers" />
+      </Principal>
+      <Dependent Role="FinesDriver">
+        <PropertyRef Name="IDDriver" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FinesDriver_Fine">
+    <End Role="Fine" Type="Self.Fine" Multiplicity="1" />
+    <End Role="FinesDriver" Type="Self.FinesDriver" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fine">
+        <PropertyRef Name="FineNuber" />
+      </Principal>
+      <Dependent Role="FinesDriver">
+        <PropertyRef Name="IDFine" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OffencePunishment_Offence">
+    <End Role="Offence" Type="Self.Offence" Multiplicity="0..1" />
+    <End Role="OffencePunishment" Type="Self.OffencePunishment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Offence">
+        <PropertyRef Name="IDOffence" />
+      </Principal>
+      <Dependent Role="OffencePunishment">
+        <PropertyRef Name="IDOffence" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_OffencePunishment_Punishment">
+    <End Role="Punishment" Type="Self.Punishment" Multiplicity="0..1" />
+    <End Role="OffencePunishment" Type="Self.OffencePunishment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Punishment">
+        <PropertyRef Name="IDPunishment" />
+      </Principal>
+      <Dependent Role="OffencePunishment">
+        <PropertyRef Name="IDPunishment" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Region_District">
+    <End Role="District" Type="Self.District" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Region" Type="Self.Region" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="IDDistrict" />
+      </Principal>
+      <Dependent Role="Region">
+        <PropertyRef Name="District" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="IDRole" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="Role" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище GIBDDModelContainer">
+    <EntitySet Name="Cars" EntityType="Self.Cars" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Categorylicense" EntityType="Self.Categorylicense" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DriverCars" EntityType="Self.DriverCars" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Drivers" EntityType="Self.Drivers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Driving license" EntityType="Self.Driving license" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Fine" EntityType="Self.Fine" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FinesDriver" EntityType="Self.FinesDriver" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Offence" EntityType="Self.Offence" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OffencePunishment" EntityType="Self.OffencePunishment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Punishment" EntityType="Self.Punishment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Cars_Region" Association="Self.FK_Cars_Region">
+      <End Role="Region" EntitySet="Region" />
+      <End Role="Cars" EntitySet="Cars" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Categorylicense_Category" Association="Self.FK_Categorylicense_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Categorylicense" EntitySet="Categorylicense" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Categorylicense_Driving license" Association="Self.FK_Categorylicense_Driving license">
+      <End Role="Driving license" EntitySet="Driving license" />
+      <End Role="Categorylicense" EntitySet="Categorylicense" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DriverCars_Drivers" Association="Self.FK_DriverCars_Drivers">
+      <End Role="Drivers" EntitySet="Drivers" />
+      <End Role="DriverCars" EntitySet="DriverCars" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Drivers_Users" Association="Self.FK_Drivers_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Drivers" EntitySet="Drivers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Driving license_Drivers" Association="Self.FK_Driving license_Drivers">
+      <End Role="Drivers" EntitySet="Drivers" />
+      <End Role="Driving license" EntitySet="Driving license" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Driving license_Region" Association="Self.FK_Driving license_Region">
+      <End Role="Region" EntitySet="Region" />
+      <End Role="Driving license" EntitySet="Driving license" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Fine_Offence" Association="Self.FK_Fine_Offence">
+      <End Role="Offence" EntitySet="Offence" />
+      <End Role="Fine" EntitySet="Fine" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FinesDriver_Drivers" Association="Self.FK_FinesDriver_Drivers">
+      <End Role="Drivers" EntitySet="Drivers" />
+      <End Role="FinesDriver" EntitySet="FinesDriver" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FinesDriver_Fine" Association="Self.FK_FinesDriver_Fine">
+      <End Role="Fine" EntitySet="Fine" />
+      <End Role="FinesDriver" EntitySet="FinesDriver" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OffencePunishment_Offence" Association="Self.FK_OffencePunishment_Offence">
+      <End Role="Offence" EntitySet="Offence" />
+      <End Role="OffencePunishment" EntitySet="OffencePunishment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_OffencePunishment_Punishment" Association="Self.FK_OffencePunishment_Punishment">
+      <End Role="Punishment" EntitySet="Punishment" />
+      <End Role="OffencePunishment" EntitySet="OffencePunishment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Region_District" Association="Self.FK_Region_District">
+      <End Role="District" EntitySet="District" />
+      <End Role="Region" EntitySet="Region" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

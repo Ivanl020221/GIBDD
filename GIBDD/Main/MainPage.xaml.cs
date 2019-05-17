@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using UtilitesLibruary;
 
 namespace GIBDD.Main
 {
@@ -23,6 +24,19 @@ namespace GIBDD.Main
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        //Переход на СПИСОК ДОКУМЕНТОВ для регистрации авто
+        private void GoToInfo(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                NavigationService.Navigate(new RegisterAuto.RegisterInfo());
+            }
+            catch (Exception ex)
+            {
+                MessageUtilites.Error(ex.Message, ex.HResult);
+            }
         }
     }
 }

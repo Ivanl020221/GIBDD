@@ -11,7 +11,7 @@
             <RowDefinition Height="0.2*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Border>
+        <Border Style="{StaticResource Fone}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>

@@ -20,7 +20,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Button Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="100">Войти</Button>
-        <Button >
+        <Button Click="GoToInfo" >
             Перечнь документов для регистрации авто
         </Button>
         <Button Grid.Column="1">

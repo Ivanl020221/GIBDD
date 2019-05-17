@@ -6,57 +6,57 @@
     <Application.Resources>
         <Style TargetType="Label">
             
-            <Setter Property="FontFamily" Value="Blackadder ITC"/>
+            <Setter Property="FontFamily" Value="Algerian"/>
             <Setter Property="FontSize" Value="28"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
         <Style TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="Blackadder ITC"/>
+            <Setter Property="FontFamily" Value="Algerian"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
         <Style TargetType="TextBox">
-            <Setter Property="FontFamily" Value="Blackadder ITC"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontFamily" Value="Algerian"/>
+            <Setter Property="FontSize" Value="18"/>
          
         </Style>
         <Style TargetType="PasswordBox">
-            <Setter Property="FontFamily" Value="Blackadder ITC"/>
+            <Setter Property="FontFamily" Value="Algerian"/>
             <Setter Property="FontSize" Value="14"/>
           
         </Style>
         <Style TargetType="DatePicker">
-            <Setter Property="FontFamily" Value="Blackadder ITC"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontFamily" Value="Algerian"/>
+            <Setter Property="FontSize" Value="20"/>
             
         </Style>
         <Style TargetType="ComboBox">
-            <Setter Property="FontFamily" Value="Blackadder ITC"/>
+            <Setter Property="FontFamily" Value="Algerian"/>
             <Setter Property="FontSize" Value="14"/>
             
         </Style>
         <Style TargetType="GroupBox">
-            <Setter Property="FontFamily" Value="Blackadder ITC"/>
+            <Setter Property="FontFamily" Value="Algerian"/>
             <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Header" Value="45"/>
+            <Setter Property="Height" Value="85"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
         </Style>
         <Style TargetType="DataGrid">
-            <Setter Property="FontFamily" Value="Blackadder ITC"/>
+            <Setter Property="FontFamily" Value="Algerian"/>
             <Setter Property="Margin" Value="10"/>
             <Setter Property="FontSize" Value="14"/>
         </Style>
         <Style TargetType="Button">
-            <Setter Property="FontFamily" Value="Blackadder ITC"/>
+            <Setter Property="FontFamily" Value="Algerian"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Height" Value="40"/>
             <Setter Property="Template" Value="{DynamicResource ButtonCorner}"/>
             <Setter Property="Margin" Value="10"/>
         </Style>
-        <Style TargetType="Border">
+        <Style TargetType="Border" x:Key="Fone">
             <Setter Property="Background" Value="#FF2074A2"/>
         </Style>
         <ControlTemplate x:Key="ButtonCorner" TargetType="{x:Type ButtonBase}">
