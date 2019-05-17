@@ -1,0 +1,6 @@
+C:\Users\DELL\source\repos\GIBDD\UtilitesLibruary\bin\Debug\UtilitesLibruary.dll
+C:\Users\DELL\source\repos\GIBDD\UtilitesLibruary\bin\Debug\UtilitesLibruary.pdb
+C:\Users\DELL\source\repos\GIBDD\UtilitesLibruary\obj\Debug\UtilitesLibruary.csprojAssemblyReference.cache
+C:\Users\DELL\source\repos\GIBDD\UtilitesLibruary\obj\Debug\UtilitesLibruary.csproj.CoreCompileInputs.cache
+C:\Users\DELL\source\repos\GIBDD\UtilitesLibruary\obj\Debug\UtilitesLibruary.dll
+C:\Users\DELL\source\repos\GIBDD\UtilitesLibruary\obj\Debug\UtilitesLibruary.pdb

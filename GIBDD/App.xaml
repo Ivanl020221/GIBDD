@@ -5,13 +5,18 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <Style TargetType="Label">
+            
             <Setter Property="FontFamily" Value="Blackadder ITC"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
         <Style TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Blackadder ITC"/>
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="FontFamily" Value="Blackadder ITC"/>
@@ -41,6 +46,7 @@
         </Style>
         <Style TargetType="DataGrid">
             <Setter Property="FontFamily" Value="Blackadder ITC"/>
+            <Setter Property="Margin" Value="10"/>
             <Setter Property="FontSize" Value="14"/>
         </Style>
         <Style TargetType="Button">
@@ -48,6 +54,10 @@
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Height" Value="40"/>
             <Setter Property="Template" Value="{DynamicResource ButtonCorner}"/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+        <Style TargetType="Border">
+            <Setter Property="Background" Value="#FF2074A2"/>
         </Style>
         <ControlTemplate x:Key="ButtonCorner" TargetType="{x:Type ButtonBase}">
             <Border x:Name="border" CornerRadius="3" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">

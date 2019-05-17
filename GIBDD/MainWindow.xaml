@@ -18,8 +18,35 @@
                     <ColumnDefinition Width="1.7*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-            <Button Template="{DynamicResource ButtonCorner}"/>
+                <Image Source="Resourses/gibdd.png"/>
+                <Label Grid.Column="1">ГОСАВТОИНСПЕКЦИЯ</Label>
+                <Button Grid.Column="2" Width="100" VerticalAlignment="Top" Click="Exit" >
+                    <Button.Content>
+                        Выход
+                    </Button.Content>
+                   
+                </Button>
+                <Button Grid.Column="2" Width="100" VerticalAlignment="Bottom"  Click="GoBack">
+                    <Button.Content>Назад</Button.Content>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Style.Setters>
+                                <Setter Property="FontFamily" Value="Blackadder ITC"/>
+                                <Setter Property="FontSize" Value="14"/>
+                                <Setter Property="Height" Value="40"/>
+                                <Setter Property="Template" Value="{DynamicResource ButtonCorner}"/>
+                                <Setter Property="Margin" Value="10"/>
+                            </Style.Setters>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=MainFrame,Path=CanGoBack}" Value="false">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </Grid>
         </Border>
+        <Frame Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" Source="/GIBDD;component/Main/MainPage.xaml"/>
     </Grid>
 </Window>
