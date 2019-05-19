@@ -64,7 +64,9 @@
     <Property Name="Number" Type="bigint" Nullable="false" />
     <Property Name="GIBDDNumber" Type="nvarchar" MaxLength="30" Nullable="false" />
     <Property Name="Driver" Type="bigint" />
-    <Property Name="Photo" Type="varbinary(max)" Nullable="false" />
+    <Property Name="Photo" Type="varbinary(max)" />
+    <Property Name="RegionBirth" Type="nvarchar" MaxLength="50" />
+    <Property Name="Old" Type="bit" />
   </EntityType>
   <EntityType Name="Fine">
     <Key>
@@ -74,20 +76,37 @@
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="pay" Type="bit" Nullable="false" />
     <Property Name="Offence" Type="bigint" Nullable="false" />
+    <Property Name="Sum" Type="float" />
   </EntityType>
   <EntityType Name="FinesDriver">
     <Key>
       <PropertyRef Name="IDFineDriver" />
     </Key>
-    <Property Name="IDFineDriver" Type="bigint" Nullable="false" />
+    <Property Name="IDFineDriver" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IDDriver" Type="bigint" Nullable="false" />
     <Property Name="IDFine" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Media">
+    <Key>
+      <PropertyRef Name="IdMedia" />
+    </Key>
+    <Property Name="IdMedia" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Media" Type="varbinary(max)" />
+    <Property Name="Type" Type="bigint" />
+    <Property Name="Fine" Type="bigint" />
+  </EntityType>
+  <EntityType Name="MediaType">
+    <Key>
+      <PropertyRef Name="IDMediaType" />
+    </Key>
+    <Property Name="IDMediaType" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="10" />
   </EntityType>
   <EntityType Name="Offence">
     <Key>
       <PropertyRef Name="IDOffence" />
     </Key>
-    <Property Name="IDOffence" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDOffence" Type="bigint" Nullable="false" />
     <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="OffencePunishment">
@@ -136,7 +155,7 @@
       <PropertyRef Name="IDUser" />
     </Key>
     <Property Name="IDUser" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
     <Property Name="Password" Type="nvarchar" MaxLength="50" />
     <Property Name="Role" Type="bigint" />
   </EntityType>
@@ -179,6 +198,18 @@
       </Principal>
       <Dependent Role="Categorylicense">
         <PropertyRef Name="IDlicense" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DriverCars_Cars">
+    <End Role="Cars" Type="Self.Cars" Multiplicity="0..1" />
+    <End Role="DriverCars" Type="Self.DriverCars" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cars">
+        <PropertyRef Name="IDCar" />
+      </Principal>
+      <Dependent Role="DriverCars">
+        <PropertyRef Name="IDCar" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -272,6 +303,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Media_Fine1">
+    <End Role="Fine" Type="Self.Fine" Multiplicity="0..1" />
+    <End Role="Media" Type="Self.Media" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fine">
+        <PropertyRef Name="FineNuber" />
+      </Principal>
+      <Dependent Role="Media">
+        <PropertyRef Name="Fine" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Media_MediaType">
+    <End Role="MediaType" Type="Self.MediaType" Multiplicity="0..1" />
+    <End Role="Media" Type="Self.Media" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MediaType">
+        <PropertyRef Name="IDMediaType" />
+      </Principal>
+      <Dependent Role="Media">
+        <PropertyRef Name="Type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_OffencePunishment_Offence">
     <End Role="Offence" Type="Self.Offence" Multiplicity="0..1" />
     <End Role="OffencePunishment" Type="Self.OffencePunishment" Multiplicity="*" />
@@ -334,6 +389,8 @@
     <EntitySet Name="Driving license" EntityType="Self.Driving license" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Fine" EntityType="Self.Fine" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FinesDriver" EntityType="Self.FinesDriver" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Media" EntityType="Self.Media" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MediaType" EntityType="Self.MediaType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Offence" EntityType="Self.Offence" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OffencePunishment" EntityType="Self.OffencePunishment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Punishment" EntityType="Self.Punishment" Schema="dbo" store:Type="Tables" />
@@ -352,6 +409,10 @@
     <AssociationSet Name="FK_Categorylicense_Driving license" Association="Self.FK_Categorylicense_Driving license">
       <End Role="Driving license" EntitySet="Driving license" />
       <End Role="Categorylicense" EntitySet="Categorylicense" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DriverCars_Cars" Association="Self.FK_DriverCars_Cars">
+      <End Role="Cars" EntitySet="Cars" />
+      <End Role="DriverCars" EntitySet="DriverCars" />
     </AssociationSet>
     <AssociationSet Name="FK_DriverCars_Drivers" Association="Self.FK_DriverCars_Drivers">
       <End Role="Drivers" EntitySet="Drivers" />
@@ -380,6 +441,14 @@
     <AssociationSet Name="FK_FinesDriver_Fine" Association="Self.FK_FinesDriver_Fine">
       <End Role="Fine" EntitySet="Fine" />
       <End Role="FinesDriver" EntitySet="FinesDriver" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Media_Fine1" Association="Self.FK_Media_Fine1">
+      <End Role="Fine" EntitySet="Fine" />
+      <End Role="Media" EntitySet="Media" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Media_MediaType" Association="Self.FK_Media_MediaType">
+      <End Role="MediaType" EntitySet="MediaType" />
+      <End Role="Media" EntitySet="Media" />
     </AssociationSet>
     <AssociationSet Name="FK_OffencePunishment_Offence" Association="Self.FK_OffencePunishment_Offence">
       <End Role="Offence" EntitySet="Offence" />

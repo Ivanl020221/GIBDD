@@ -38,5 +38,30 @@ namespace GIBDD.Main
                 MessageUtilites.Error(ex.Message, ex.HResult);
             }
         }
+        //Переход на список документод для полученмия прав
+        private void GoToIincense(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                NavigationService.Navigate(new license.LicenseInfo());
+            }
+            catch (Exception ex)
+            {
+                MessageUtilites.Error(ex.Message, ex.HResult);
+            }
+        }
+
+        //Переход на список штрафов
+        private void GoToFine(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                NavigationService.Navigate(new Fine.FinesList());
+            }
+            catch (Exception ex)
+            {
+                MessageUtilites.Error(ex.Message, ex.HResult);
+            }
+        }
     }
 }

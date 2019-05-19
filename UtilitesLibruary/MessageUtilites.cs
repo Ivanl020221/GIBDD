@@ -20,5 +20,15 @@ namespace UtilitesLibruary
         {
             MessageBox.Show(Message, $"Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
+        //Вывод вопроса
+        public static MessageBoxResult Question(string Message)
+        {
+            return MessageBox.Show(Message, "Вопрос", MessageBoxButton.YesNo, MessageBoxImage.Question);
+        }
+        //Вывод инофрмационного диалога
+        public static void Info(string Message)
+        {
+            MessageBox.Show(Message, "Инфо", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
     }
 }

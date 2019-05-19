@@ -18,6 +18,7 @@ namespace GIBDD.Model
         public Nullable<long> IDCar { get; set; }
         public Nullable<long> IDDriver { get; set; }
     
+        public virtual Cars Cars { get; set; }
         public virtual Drivers Drivers { get; set; }
     }
 }

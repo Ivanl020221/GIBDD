@@ -14,6 +14,12 @@ namespace GIBDD.Model
     
     public partial class Cars
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Cars()
+        {
+            this.DriverCars = new HashSet<DriverCars>();
+        }
+    
         public long IDCar { get; set; }
         public string Number { get; set; }
         public long Region { get; set; }
@@ -21,5 +27,7 @@ namespace GIBDD.Model
         public string PTS { get; set; }
     
         public virtual Region Region1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DriverCars> DriverCars { get; set; }
     }
 }

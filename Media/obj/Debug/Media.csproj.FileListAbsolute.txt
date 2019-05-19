@@ -1,0 +1,9 @@
+C:\Users\DELL\source\repos\GIBDD\Media\obj\Debug\Media.csproj.CoreCompileInputs.cache
+C:\Users\DELL\source\repos\GIBDD\Media\bin\Debug\Media.dll
+C:\Users\DELL\source\repos\GIBDD\Media\bin\Debug\Media.pdb
+C:\Users\DELL\source\repos\GIBDD\Media\obj\Debug\Media.csprojAssemblyReference.cache
+C:\Users\DELL\source\repos\GIBDD\Media\obj\Debug\Media.dll
+C:\Users\DELL\source\repos\GIBDD\Media\obj\Debug\Media.pdb
+C:\Users\DELL\source\repos\GIBDD\Media\bin\Debug\UtilitesLibruary.dll
+C:\Users\DELL\source\repos\GIBDD\Media\bin\Debug\UtilitesLibruary.pdb
+C:\Users\DELL\source\repos\GIBDD\Media\obj\Debug\Media.csproj.CopyComplete

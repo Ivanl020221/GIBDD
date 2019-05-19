@@ -47,6 +47,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Drivers">
+      <EntityTypeMapping TypeName="GIBDDModel.Drivers">
+        <MappingFragment StoreEntitySet="Drivers">
+          <ScalarProperty Name="IDDrivers" ColumnName="IDDrivers" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="Account" ColumnName="Account" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="passport" ColumnName="passport" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Driving_license">
       <EntityTypeMapping TypeName="GIBDDModel.Driving_license">
         <MappingFragment StoreEntitySet="Driving license">
@@ -58,6 +71,8 @@
           <ScalarProperty Name="GIBDDNumber" ColumnName="GIBDDNumber" />
           <ScalarProperty Name="Driver" ColumnName="Driver" />
           <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="RegionBirth" ColumnName="RegionBirth" />
+          <ScalarProperty Name="Old" ColumnName="Old" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -68,6 +83,7 @@
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="pay" ColumnName="pay" />
           <ScalarProperty Name="Offence" ColumnName="Offence" />
+          <ScalarProperty Name="Sum" ColumnName="Sum" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -77,6 +93,24 @@
           <ScalarProperty Name="IDFineDriver" ColumnName="IDFineDriver" />
           <ScalarProperty Name="IDDriver" ColumnName="IDDriver" />
           <ScalarProperty Name="IDFine" ColumnName="IDFine" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Media">
+      <EntityTypeMapping TypeName="GIBDDModel.Media">
+        <MappingFragment StoreEntitySet="Media">
+          <ScalarProperty Name="IdMedia" ColumnName="IdMedia" />
+          <ScalarProperty Name="Media1" ColumnName="Media" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Fine" ColumnName="Fine" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MediaType">
+      <EntityTypeMapping TypeName="GIBDDModel.MediaType">
+        <MappingFragment StoreEntitySet="MediaType">
+          <ScalarProperty Name="IDMediaType" ColumnName="IDMediaType" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -138,22 +172,9 @@
       <EntityTypeMapping TypeName="GIBDDModel.Users">
         <MappingFragment StoreEntitySet="Users">
           <ScalarProperty Name="IDUser" ColumnName="IDUser" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="Role" ColumnName="Role" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Drivers">
-      <EntityTypeMapping TypeName="GIBDDModel.Drivers">
-        <MappingFragment StoreEntitySet="Drivers">
-          <ScalarProperty Name="passport" ColumnName="passport" />
-          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-          <ScalarProperty Name="Account" ColumnName="Account" />
-          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-          <ScalarProperty Name="LastName" ColumnName="LastName" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-          <ScalarProperty Name="IDDrivers" ColumnName="IDDrivers" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

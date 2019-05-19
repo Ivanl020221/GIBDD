@@ -1,0 +1,46 @@
+﻿<Page x:Class="GIBDD.RulesTest.TestPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GIBDD.RulesTest"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="TestPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
+            <StackPanel Orientation="Horizontal" Name="Signs"/>
+        </ScrollViewer>
+        <WrapPanel Grid.Row="1">
+            <GroupBox Header="Вопрос 1" >
+                <Image AllowDrop="True" Drop="DropImage" HorizontalAlignment="Right" Margin="0,0,-0.4,0.2" Width="66" Source="/GIBDD;component/Resourses/null.png"></Image>
+            </GroupBox>
+            <GroupBox Header="Вопрос 2">
+                <Image AllowDrop="True" Drop="DropImage" Source="/GIBDD;component/Resourses/null.png"></Image>
+            </GroupBox>
+            <GroupBox Header="Вопрос 3">
+                <Image AllowDrop="True" Drop="DropImage" Source="/GIBDD;component/Resourses/null.png"></Image>
+            </GroupBox>
+            <GroupBox Header="Вопрос 4">
+                <Image AllowDrop="True" Drop="DropImage" Source="/GIBDD;component/Resourses/null.png"></Image>
+            </GroupBox>
+            <GroupBox Header="Вопрос 5">
+                <Image AllowDrop="True" Drop="DropImage" Source="/GIBDD;component/Resourses/null.png"></Image>
+            </GroupBox>
+            <GroupBox Header="Вопрос 6">
+                <Image AllowDrop="True" Drop="DropImage" Source="/GIBDD;component/Resourses/null.png"></Image>
+            </GroupBox>
+            <GroupBox Header="Вопрос 7">
+                <Image AllowDrop="True" Drop="DropImage" Source="/GIBDD;component/Resourses/null.png"></Image>
+            </GroupBox>
+            <GroupBox Header="Вопрос 8">
+                <Image AllowDrop="True" Drop="DropImage" Source="/GIBDD;component/Resourses/null.png"></Image>
+            </GroupBox>
+        </WrapPanel>
+    </Grid>
+</Page>

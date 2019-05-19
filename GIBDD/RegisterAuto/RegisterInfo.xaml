@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:GIBDD.RegisterAuto"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="RegisterInfo">
+      Title="Список документов для регистрации авто">
 
     <Grid>
         <Grid.RowDefinitions>

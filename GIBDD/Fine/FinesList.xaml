@@ -1,0 +1,147 @@
+﻿<Page x:Class="GIBDD.Fine.FinesList"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GIBDD.Fine"
+      mc:Ignorable="d" 
+      d:DesignHeight="850" d:DesignWidth="800"
+      Title="Мои штрафы">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.7*" MinWidth="200"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition MinWidth="300"/>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.3*"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <GroupBox Header="Номер штрафа">
+                <TextBox Name="Number"/>
+            </GroupBox>
+            <GroupBox Header="Мои штарфы" Height="Auto" Grid.Row="1" BorderBrush="Black">
+                <DataGrid IsReadOnly="True" Name="Fine" SelectedItem="{Binding FFine}" AutoGenerateColumns="False">
+                    <DataGrid.RowStyle>
+                        <Style TargetType="DataGridRow">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding pay}" Value="true">
+                                    <Setter Property="Background" Value="Green"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding FineNuber}" Header="Номер" Width="*"/>
+                        <DataGridTextColumn Binding="{Binding Date}" Header="Дата" Width="*"/>
+                        <DataGridTextColumn Binding="{Binding Sum}" Header="Сумма" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+        </Grid>
+        <GridSplitter Grid.Column="1" ShowsPreview="False" Width="3"
+        HorizontalAlignment="Center" VerticalAlignment="Stretch" />
+        <GroupBox Height="auto" BorderBrush="Black" Grid.Column="2" Header="Подробная информация">
+            <ScrollViewer Name="InfoAll" IsDeferredScrollingEnabled="True">
+                <ScrollViewer.Style>
+                    <Style TargetType="ScrollViewer">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=Fine,Path=SelectedIndex}" Value="-1">
+                                <Setter Property="IsEnabled" Value="False"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ScrollViewer.Style>
+                <StackPanel>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0.5*"/>
+                            <RowDefinition Height="0.7*"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <GroupBox Header="Номер" Name="Numb">
+                            <TextBox FontSize="20" Name="TextNumber" IsReadOnly="True" ></TextBox>
+                        </GroupBox>
+                        <GroupBox Header="Описание" Height="auto" MinHeight="150" BorderBrush="Black" Grid.Row="1" Name="Op">
+                            <ScrollViewer>
+                                <TextBlock TextWrapping="Wrap" Name="Info" Text="{Binding Offence1.Text ,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            </ScrollViewer>
+                        </GroupBox>
+                        <GroupBox Height="auto" Grid.Row="2" Header="Оплата" Name="Paym">
+                            <GroupBox.Style>
+                                <Style TargetType="GroupBox">
+                                    <Style.Triggers>
+
+                                    </Style.Triggers>
+                                </Style>
+                            </GroupBox.Style>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="0.5*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <GroupBox Header="Сумма" Name="Summ">
+                                    <TextBox Name="Sum" IsReadOnly="True" Text="{Binding Sum  ,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                                </GroupBox>
+                                <GroupBox Grid.Column="1" Header="%">
+                                    <TextBox IsReadOnly="True" Name="Prosent"></TextBox>
+                                </GroupBox>
+                                <GroupBox Grid.Row="1" Header="Итого">
+                                    <TextBox Name="all" IsReadOnly="True"></TextBox>
+                                </GroupBox>
+                                <Button Grid.Column="1" Grid.Row="1" Click="PayThis">Оплатить</Button>
+                            </Grid>
+                        </GroupBox>
+                    </Grid>
+                    <GroupBox Header="Медиа" Height="Auto">
+                        <StackPanel>
+                            <GroupBox Header="Видео" BorderBrush="Black" Height="Auto">
+                                <Grid Height="400">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="2*"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <MediaElement Name="Video" LoadedBehavior="Manual"/>
+                                    <Grid Grid.Row="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Click="PlayVideo">Пуск</Button>
+                                        <Button Grid.Column="1" Click="StopVideo">Пауза</Button>
+                                    </Grid>
+                                </Grid>
+                            </GroupBox>
+                            <GroupBox Header="Видео" BorderBrush="Black" Height="Auto">
+                                <Grid Height="200">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="2*"/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Slider Name="Rail"></Slider>
+                                    <MediaElement Name="Audio" LoadedBehavior="Manual"/>
+                                    <Grid Grid.Row="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Click="PlayAudio">Пуск</Button>
+                                        <Button Grid.Column="1" Click="StopAudio">Пауза</Button>
+                                    </Grid>
+                                </Grid>
+                            </GroupBox>
+                            
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </ScrollViewer>
+        </GroupBox>
+    </Grid>
+
+</Page>

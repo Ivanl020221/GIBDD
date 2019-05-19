@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище GIBDDModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище GIBDDModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Cars">
           <Key>
             <PropertyRef Name="IDCar" />
@@ -69,7 +69,9 @@
           <Property Name="Number" Type="bigint" Nullable="false" />
           <Property Name="GIBDDNumber" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="Driver" Type="bigint" />
-          <Property Name="Photo" Type="varbinary(max)" Nullable="false" />
+          <Property Name="Photo" Type="varbinary(max)" />
+          <Property Name="RegionBirth" Type="nvarchar" MaxLength="50" />
+          <Property Name="Old" Type="bit" />
         </EntityType>
         <EntityType Name="Fine">
           <Key>
@@ -79,20 +81,37 @@
           <Property Name="Date" Type="datetime" Nullable="false" />
           <Property Name="pay" Type="bit" Nullable="false" />
           <Property Name="Offence" Type="bigint" Nullable="false" />
+          <Property Name="Sum" Type="float" />
         </EntityType>
         <EntityType Name="FinesDriver">
           <Key>
             <PropertyRef Name="IDFineDriver" />
           </Key>
-          <Property Name="IDFineDriver" Type="bigint" Nullable="false" />
+          <Property Name="IDFineDriver" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IDDriver" Type="bigint" Nullable="false" />
           <Property Name="IDFine" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Media">
+          <Key>
+            <PropertyRef Name="IdMedia" />
+          </Key>
+          <Property Name="IdMedia" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Media" Type="varbinary(max)" />
+          <Property Name="Type" Type="bigint" />
+          <Property Name="Fine" Type="bigint" />
+        </EntityType>
+        <EntityType Name="MediaType">
+          <Key>
+            <PropertyRef Name="IDMediaType" />
+          </Key>
+          <Property Name="IDMediaType" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Offence">
           <Key>
             <PropertyRef Name="IDOffence" />
           </Key>
-          <Property Name="IDOffence" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDOffence" Type="bigint" Nullable="false" />
           <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="OffencePunishment">
@@ -141,7 +160,7 @@
             <PropertyRef Name="IDUser" />
           </Key>
           <Property Name="IDUser" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" />
           <Property Name="Role" Type="bigint" />
         </EntityType>
@@ -184,6 +203,18 @@
             </Principal>
             <Dependent Role="Categorylicense">
               <PropertyRef Name="IDlicense" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DriverCars_Cars">
+          <End Role="Cars" Type="Self.Cars" Multiplicity="0..1" />
+          <End Role="DriverCars" Type="Self.DriverCars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="IDCar" />
+            </Principal>
+            <Dependent Role="DriverCars">
+              <PropertyRef Name="IDCar" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -277,6 +308,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Media_Fine1">
+          <End Role="Fine" Type="Self.Fine" Multiplicity="0..1" />
+          <End Role="Media" Type="Self.Media" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fine">
+              <PropertyRef Name="FineNuber" />
+            </Principal>
+            <Dependent Role="Media">
+              <PropertyRef Name="Fine" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Media_MediaType">
+          <End Role="MediaType" Type="Self.MediaType" Multiplicity="0..1" />
+          <End Role="Media" Type="Self.Media" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MediaType">
+              <PropertyRef Name="IDMediaType" />
+            </Principal>
+            <Dependent Role="Media">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_OffencePunishment_Offence">
           <End Role="Offence" Type="Self.Offence" Multiplicity="0..1" />
           <End Role="OffencePunishment" Type="Self.OffencePunishment" Multiplicity="*" />
@@ -339,6 +394,8 @@
           <EntitySet Name="Driving license" EntityType="Self.Driving license" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Fine" EntityType="Self.Fine" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FinesDriver" EntityType="Self.FinesDriver" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Media" EntityType="Self.Media" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MediaType" EntityType="Self.MediaType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Offence" EntityType="Self.Offence" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OffencePunishment" EntityType="Self.OffencePunishment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Punishment" EntityType="Self.Punishment" Schema="dbo" store:Type="Tables" />
@@ -357,6 +414,10 @@
           <AssociationSet Name="FK_Categorylicense_Driving license" Association="Self.FK_Categorylicense_Driving license">
             <End Role="Driving license" EntitySet="Driving license" />
             <End Role="Categorylicense" EntitySet="Categorylicense" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DriverCars_Cars" Association="Self.FK_DriverCars_Cars">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="DriverCars" EntitySet="DriverCars" />
           </AssociationSet>
           <AssociationSet Name="FK_DriverCars_Drivers" Association="Self.FK_DriverCars_Drivers">
             <End Role="Drivers" EntitySet="Drivers" />
@@ -386,6 +447,14 @@
             <End Role="Fine" EntitySet="Fine" />
             <End Role="FinesDriver" EntitySet="FinesDriver" />
           </AssociationSet>
+          <AssociationSet Name="FK_Media_Fine1" Association="Self.FK_Media_Fine1">
+            <End Role="Fine" EntitySet="Fine" />
+            <End Role="Media" EntitySet="Media" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Media_MediaType" Association="Self.FK_Media_MediaType">
+            <End Role="MediaType" EntitySet="MediaType" />
+            <End Role="Media" EntitySet="Media" />
+          </AssociationSet>
           <AssociationSet Name="FK_OffencePunishment_Offence" Association="Self.FK_OffencePunishment_Offence">
             <End Role="Offence" EntitySet="Offence" />
             <End Role="OffencePunishment" EntitySet="OffencePunishment" />
@@ -403,7 +472,8 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="GIBDDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -417,6 +487,7 @@
           <Property Name="VIN" Type="String" MaxLength="17" FixedLength="true" Unicode="true" />
           <Property Name="PTS" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Region1" Relationship="Self.FK_Cars_Region" FromRole="Cars" ToRole="Region" />
+          <NavigationProperty Name="DriverCars" Relationship="Self.FK_DriverCars_Cars" FromRole="Cars" ToRole="DriverCars" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -452,7 +523,24 @@
           <Property Name="IDDriverCars" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IDCar" Type="Int64" />
           <Property Name="IDDriver" Type="Int64" />
-          <NavigationProperty Name="Drivers" Relationship="GIBDDModel.FK_DriverCars_Drivers" FromRole="DriverCars" ToRole="Drivers" />
+          <NavigationProperty Name="Cars" Relationship="Self.FK_DriverCars_Cars" FromRole="DriverCars" ToRole="Cars" />
+          <NavigationProperty Name="Drivers" Relationship="Self.FK_DriverCars_Drivers" FromRole="DriverCars" ToRole="Drivers" />
+        </EntityType>
+        <EntityType Name="Drivers">
+          <Key>
+            <PropertyRef Name="IDDrivers" />
+          </Key>
+          <Property Name="IDDrivers" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Account" Type="Int64" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="passport" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="DriverCars" Relationship="Self.FK_DriverCars_Drivers" FromRole="Drivers" ToRole="DriverCars" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Drivers_Users" FromRole="Drivers" ToRole="Users" />
+          <NavigationProperty Name="Driving_license" Relationship="Self.FK_Driving_license_Drivers" FromRole="Drivers" ToRole="Driving_license" />
+          <NavigationProperty Name="FinesDriver" Relationship="Self.FK_FinesDriver_Drivers" FromRole="Drivers" ToRole="FinesDriver" />
         </EntityType>
         <EntityType Name="Driving_license">
           <Key>
@@ -465,10 +553,12 @@
           <Property Name="Number" Type="Int64" Nullable="false" />
           <Property Name="GIBDDNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Driver" Type="Int64" />
-          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="RegionBirth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Old" Type="Boolean" />
           <NavigationProperty Name="Categorylicense" Relationship="Self.FK_Categorylicense_Driving_license" FromRole="Driving_license" ToRole="Categorylicense" />
+          <NavigationProperty Name="Drivers" Relationship="Self.FK_Driving_license_Drivers" FromRole="Driving_license" ToRole="Drivers" />
           <NavigationProperty Name="Region1" Relationship="Self.FK_Driving_license_Region" FromRole="Driving_license" ToRole="Region" />
-          <NavigationProperty Name="Drivers" Relationship="GIBDDModel.FK_Driving_license_Drivers" FromRole="Driving_license" ToRole="Drivers" />
         </EntityType>
         <EntityType Name="Fine">
           <Key>
@@ -478,24 +568,45 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="pay" Type="Boolean" Nullable="false" />
           <Property Name="Offence" Type="Int64" Nullable="false" />
+          <Property Name="Sum" Type="Double" />
           <NavigationProperty Name="Offence1" Relationship="Self.FK_Fine_Offence" FromRole="Fine" ToRole="Offence" />
           <NavigationProperty Name="FinesDriver" Relationship="Self.FK_FinesDriver_Fine" FromRole="Fine" ToRole="FinesDriver" />
+          <NavigationProperty Name="Media" Relationship="Self.FK_Media_Fine1" FromRole="Fine" ToRole="Media" />
         </EntityType>
         <EntityType Name="FinesDriver">
           <Key>
             <PropertyRef Name="IDFineDriver" />
           </Key>
-          <Property Name="IDFineDriver" Type="Int64" Nullable="false" />
+          <Property Name="IDFineDriver" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IDDriver" Type="Int64" Nullable="false" />
           <Property Name="IDFine" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Drivers" Relationship="Self.FK_FinesDriver_Drivers" FromRole="FinesDriver" ToRole="Drivers" />
           <NavigationProperty Name="Fine" Relationship="Self.FK_FinesDriver_Fine" FromRole="FinesDriver" ToRole="Fine" />
-          <NavigationProperty Name="Drivers" Relationship="GIBDDModel.FK_FinesDriver_Drivers" FromRole="FinesDriver" ToRole="Drivers" />
+        </EntityType>
+        <EntityType Name="Media">
+          <Key>
+            <PropertyRef Name="IdMedia" />
+          </Key>
+          <Property Name="IdMedia" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Media1" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Type" Type="Int64" />
+          <Property Name="Fine" Type="Int64" />
+          <NavigationProperty Name="Fine1" Relationship="Self.FK_Media_Fine1" FromRole="Media" ToRole="Fine" />
+          <NavigationProperty Name="MediaType" Relationship="Self.FK_Media_MediaType" FromRole="Media" ToRole="MediaType" />
+        </EntityType>
+        <EntityType Name="MediaType">
+          <Key>
+            <PropertyRef Name="IDMediaType" />
+          </Key>
+          <Property Name="IDMediaType" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Media" Relationship="Self.FK_Media_MediaType" FromRole="MediaType" ToRole="Media" />
         </EntityType>
         <EntityType Name="Offence">
           <Key>
             <PropertyRef Name="IDOffence" />
           </Key>
-          <Property Name="IDOffence" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDOffence" Type="Int64" Nullable="false" />
           <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Fine" Relationship="Self.FK_Fine_Offence" FromRole="Offence" ToRole="Fine" />
           <NavigationProperty Name="OffencePunishment" Relationship="Self.FK_OffencePunishment_Offence" FromRole="Offence" ToRole="OffencePunishment" />
@@ -553,11 +664,11 @@
             <PropertyRef Name="IDUser" />
           </Key>
           <Property Name="IDUser" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Role" Type="Int64" />
+          <NavigationProperty Name="Drivers" Relationship="Self.FK_Drivers_Users" FromRole="Users" ToRole="Drivers" />
           <NavigationProperty Name="Roles" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
-          <NavigationProperty Name="Drivers" Relationship="GIBDDModel.FK_Drivers_Users" FromRole="Users" ToRole="Drivers" />
         </EntityType>
         <Association Name="FK_Cars_Region">
           <End Role="Region" Type="Self.Region" Multiplicity="1">
@@ -570,6 +681,18 @@
             </Principal>
             <Dependent Role="Cars">
               <PropertyRef Name="Region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DriverCars_Cars">
+          <End Role="Cars" Type="Self.Cars" Multiplicity="0..1" />
+          <End Role="DriverCars" Type="Self.DriverCars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="IDCar" />
+            </Principal>
+            <Dependent Role="DriverCars">
+              <PropertyRef Name="IDCar" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -615,6 +738,58 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DriverCars_Drivers">
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="0..1" />
+          <End Role="DriverCars" Type="Self.DriverCars" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="IDDrivers" />
+            </Principal>
+            <Dependent Role="DriverCars">
+              <PropertyRef Name="IDDriver" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Drivers_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="IDUser" />
+            </Principal>
+            <Dependent Role="Drivers">
+              <PropertyRef Name="Account" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Driving_license_Drivers">
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Driving_license" Type="Self.Driving_license" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="IDDrivers" />
+            </Principal>
+            <Dependent Role="Driving_license">
+              <PropertyRef Name="Driver" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FinesDriver_Drivers">
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="1" />
+          <End Role="FinesDriver" Type="Self.FinesDriver" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="IDDrivers" />
+            </Principal>
+            <Dependent Role="FinesDriver">
+              <PropertyRef Name="IDDriver" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Driving_license_Region">
           <End Role="Region" Type="Self.Region" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -650,6 +825,30 @@
             </Principal>
             <Dependent Role="FinesDriver">
               <PropertyRef Name="IDFine" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Media_Fine1">
+          <End Role="Fine" Type="Self.Fine" Multiplicity="0..1" />
+          <End Role="Media" Type="Self.Media" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fine">
+              <PropertyRef Name="FineNuber" />
+            </Principal>
+            <Dependent Role="Media">
+              <PropertyRef Name="Fine" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Media_MediaType">
+          <End Role="MediaType" Type="Self.MediaType" Multiplicity="0..1" />
+          <End Role="Media" Type="Self.Media" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MediaType">
+              <PropertyRef Name="IDMediaType" />
+            </Principal>
+            <Dependent Role="Media">
+              <PropertyRef Name="Type" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -697,9 +896,12 @@
           <EntitySet Name="Categorylicense" EntityType="Self.Categorylicense" />
           <EntitySet Name="District" EntityType="Self.District" />
           <EntitySet Name="DriverCars" EntityType="Self.DriverCars" />
+          <EntitySet Name="Drivers" EntityType="Self.Drivers" />
           <EntitySet Name="Driving_license" EntityType="Self.Driving_license" />
           <EntitySet Name="Fine" EntityType="Self.Fine" />
           <EntitySet Name="FinesDriver" EntityType="Self.FinesDriver" />
+          <EntitySet Name="Media" EntityType="Self.Media" />
+          <EntitySet Name="MediaType" EntityType="Self.MediaType" />
           <EntitySet Name="Offence" EntityType="Self.Offence" />
           <EntitySet Name="OffencePunishment" EntityType="Self.OffencePunishment" />
           <EntitySet Name="Punishment" EntityType="Self.Punishment" />
@@ -710,6 +912,10 @@
           <AssociationSet Name="FK_Cars_Region" Association="Self.FK_Cars_Region">
             <End Role="Region" EntitySet="Region" />
             <End Role="Cars" EntitySet="Cars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DriverCars_Cars" Association="Self.FK_DriverCars_Cars">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="DriverCars" EntitySet="DriverCars" />
           </AssociationSet>
           <AssociationSet Name="FK_Categorylicense_Category" Association="Self.FK_Categorylicense_Category">
             <End Role="Category" EntitySet="Category" />
@@ -723,6 +929,22 @@
             <End Role="District" EntitySet="District" />
             <End Role="Region" EntitySet="Region" />
           </AssociationSet>
+          <AssociationSet Name="FK_DriverCars_Drivers" Association="Self.FK_DriverCars_Drivers">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="DriverCars" EntitySet="DriverCars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Drivers_Users" Association="Self.FK_Drivers_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Drivers" EntitySet="Drivers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Driving_license_Drivers" Association="Self.FK_Driving_license_Drivers">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="Driving_license" EntitySet="Driving_license" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FinesDriver_Drivers" Association="Self.FK_FinesDriver_Drivers">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="FinesDriver" EntitySet="FinesDriver" />
+          </AssociationSet>
           <AssociationSet Name="FK_Driving_license_Region" Association="Self.FK_Driving_license_Region">
             <End Role="Region" EntitySet="Region" />
             <End Role="Driving_license" EntitySet="Driving_license" />
@@ -734,6 +956,14 @@
           <AssociationSet Name="FK_FinesDriver_Fine" Association="Self.FK_FinesDriver_Fine">
             <End Role="Fine" EntitySet="Fine" />
             <End Role="FinesDriver" EntitySet="FinesDriver" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Media_Fine1" Association="Self.FK_Media_Fine1">
+            <End Role="Fine" EntitySet="Fine" />
+            <End Role="Media" EntitySet="Media" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Media_MediaType" Association="Self.FK_Media_MediaType">
+            <End Role="MediaType" EntitySet="MediaType" />
+            <End Role="Media" EntitySet="Media" />
           </AssociationSet>
           <AssociationSet Name="FK_OffencePunishment_Offence" Association="Self.FK_OffencePunishment_Offence">
             <End Role="Offence" EntitySet="Offence" />
@@ -747,92 +977,7 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <EntitySet Name="Drivers" EntityType="GIBDDModel.Drivers" />
-          <AssociationSet Name="FK_DriverCars_Drivers" Association="GIBDDModel.FK_DriverCars_Drivers">
-            <End Role="Drivers" EntitySet="Drivers" />
-            <End Role="DriverCars" EntitySet="DriverCars" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Drivers_Users" Association="GIBDDModel.FK_Drivers_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Drivers" EntitySet="Drivers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Driving_license_Drivers" Association="GIBDDModel.FK_Driving_license_Drivers">
-            <End Role="Drivers" EntitySet="Drivers" />
-            <End Role="Driving_license" EntitySet="Driving_license" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FinesDriver_Drivers" Association="GIBDDModel.FK_FinesDriver_Drivers">
-            <End Role="Drivers" EntitySet="Drivers" />
-            <End Role="FinesDriver" EntitySet="FinesDriver" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Drivers">
-          <Key>
-            <PropertyRef Name="IDDrivers" />
-          </Key>
-          <Property Name="IDDrivers" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="MiddleName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="Account" Type="Int64" />
-          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="passport" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="DriverCars" Relationship="GIBDDModel.FK_DriverCars_Drivers" FromRole="Drivers" ToRole="DriverCars" />
-          <NavigationProperty Name="Users" Relationship="GIBDDModel.FK_Drivers_Users" FromRole="Drivers" ToRole="Users" />
-          <NavigationProperty Name="Driving_license" Relationship="GIBDDModel.FK_Driving_license_Drivers" FromRole="Drivers" ToRole="Driving_license" />
-          <NavigationProperty Name="FinesDriver" Relationship="GIBDDModel.FK_FinesDriver_Drivers" FromRole="Drivers" ToRole="FinesDriver" />
-        </EntityType>
-        <Association Name="FK_DriverCars_Drivers">
-          <End Type="GIBDDModel.Drivers" Role="Drivers" Multiplicity="0..1" />
-          <End Type="GIBDDModel.DriverCars" Role="DriverCars" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Drivers">
-              <PropertyRef Name="IDDrivers" />
-            </Principal>
-            <Dependent Role="DriverCars">
-              <PropertyRef Name="IDDriver" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Drivers_Users">
-          <End Type="GIBDDModel.Users" Role="Users" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="GIBDDModel.Drivers" Role="Drivers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="IDUser" />
-            </Principal>
-            <Dependent Role="Drivers">
-              <PropertyRef Name="Account" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Driving_license_Drivers">
-          <End Type="GIBDDModel.Drivers" Role="Drivers" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="GIBDDModel.Driving_license" Role="Driving_license" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Drivers">
-              <PropertyRef Name="IDDrivers" />
-            </Principal>
-            <Dependent Role="Driving_license">
-              <PropertyRef Name="Driver" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FinesDriver_Drivers">
-          <End Type="GIBDDModel.Drivers" Role="Drivers" Multiplicity="1" />
-          <End Type="GIBDDModel.FinesDriver" Role="FinesDriver" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Drivers">
-              <PropertyRef Name="IDDrivers" />
-            </Principal>
-            <Dependent Role="FinesDriver">
-              <PropertyRef Name="IDDriver" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -885,6 +1030,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Drivers">
+            <EntityTypeMapping TypeName="GIBDDModel.Drivers">
+              <MappingFragment StoreEntitySet="Drivers">
+                <ScalarProperty Name="IDDrivers" ColumnName="IDDrivers" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="passport" ColumnName="passport" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Driving_license">
             <EntityTypeMapping TypeName="GIBDDModel.Driving_license">
               <MappingFragment StoreEntitySet="Driving license">
@@ -896,6 +1054,8 @@
                 <ScalarProperty Name="GIBDDNumber" ColumnName="GIBDDNumber" />
                 <ScalarProperty Name="Driver" ColumnName="Driver" />
                 <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="RegionBirth" ColumnName="RegionBirth" />
+                <ScalarProperty Name="Old" ColumnName="Old" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -906,6 +1066,7 @@
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="pay" ColumnName="pay" />
                 <ScalarProperty Name="Offence" ColumnName="Offence" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -915,6 +1076,24 @@
                 <ScalarProperty Name="IDFineDriver" ColumnName="IDFineDriver" />
                 <ScalarProperty Name="IDDriver" ColumnName="IDDriver" />
                 <ScalarProperty Name="IDFine" ColumnName="IDFine" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Media">
+            <EntityTypeMapping TypeName="GIBDDModel.Media">
+              <MappingFragment StoreEntitySet="Media">
+                <ScalarProperty Name="IdMedia" ColumnName="IdMedia" />
+                <ScalarProperty Name="Media1" ColumnName="Media" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Fine" ColumnName="Fine" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MediaType">
+            <EntityTypeMapping TypeName="GIBDDModel.MediaType">
+              <MappingFragment StoreEntitySet="MediaType">
+                <ScalarProperty Name="IDMediaType" ColumnName="IDMediaType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -976,22 +1155,9 @@
             <EntityTypeMapping TypeName="GIBDDModel.Users">
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="IDUser" ColumnName="IDUser" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Role" ColumnName="Role" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Drivers">
-            <EntityTypeMapping TypeName="GIBDDModel.Drivers">
-              <MappingFragment StoreEntitySet="Drivers">
-                <ScalarProperty Name="passport" ColumnName="passport" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="Account" ColumnName="Account" />
-                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="IDDrivers" ColumnName="IDDrivers" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

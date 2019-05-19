@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GIBDD"
         mc:Ignorable="d"
-        Title="ГИБДД" Height="750" Width="1000">
+        Title="ГИБДД" Height="750" Width="1000" MinHeight="450" MinWidth="600">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.2*"/>
@@ -20,13 +20,13 @@
                 </Grid.ColumnDefinitions>
                 <Image Source="Resourses/gibdd.png"/>
                 <Label Grid.Column="1">ГОСАВТОИНСПЕКЦИЯ</Label>
-                <Button Grid.Column="2" Width="100" VerticalAlignment="Top" Click="Exit" >
+                <Button Grid.Column="2" Width="100" VerticalAlignment="Top" Click="Exit" HorizontalAlignment="Right" >
                     <Button.Content>
                         Выход
                     </Button.Content>
                    
                 </Button>
-                <Button Grid.Column="2" Width="100" VerticalAlignment="Bottom"  Click="GoBack">
+                <Button Grid.Column="2" Width="100" VerticalAlignment="Bottom"  Click="GoBack" HorizontalAlignment="Right">
                     <Button.Content>Назад</Button.Content>
                     <Button.Style>
                         <Style TargetType="Button">
@@ -47,6 +47,6 @@
                 </Button>
             </Grid>
         </Border>
-        <Frame Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" Source="/GIBDD;component/Main/MainPage.xaml"/>
+        <Frame Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" Source="/GIBDD;component/RulesTest/TestPage.xaml"/>
     </Grid>
 </Window>

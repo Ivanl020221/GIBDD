@@ -34,6 +34,8 @@ namespace GIBDD.Model
         public virtual DbSet<Driving_license> Driving_license { get; set; }
         public virtual DbSet<Fine> Fine { get; set; }
         public virtual DbSet<FinesDriver> FinesDriver { get; set; }
+        public virtual DbSet<Media> Media { get; set; }
+        public virtual DbSet<MediaType> MediaType { get; set; }
         public virtual DbSet<Offence> Offence { get; set; }
         public virtual DbSet<OffencePunishment> OffencePunishment { get; set; }
         public virtual DbSet<Punishment> Punishment { get; set; }

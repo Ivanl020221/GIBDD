@@ -19,7 +19,7 @@ using GIBDD.Model;
 namespace GIBDD.RegisterAuto
 {
     /// <summary>
-    /// Логика взаимодействия для RegisterPage.xaml
+    /// Странциа регистрации трансорта
     /// </summary>
     public partial class RegisterPage : Page
     {
@@ -32,6 +32,7 @@ namespace GIBDD.RegisterAuto
         GIBDDEntities context = new GIBDDEntities();
 
         List<Model.Region> Regions { get; set; }
+        Drivers GetDrivers { get; set; }
 
         //Инициализация компонентов и выгрузка данных
         public RegisterPage()
@@ -40,7 +41,7 @@ namespace GIBDD.RegisterAuto
             {
                 this.InitializeComponent();
                 Passport.Mask = "0000-000000";
-                VIN.Mask = "AAAAAAAAAAAAAAAAAA";
+                VIN.Mask = "AAAAAAAAAAAAAAAAA";
                 PTS.Mask = "00 LL 000000";
                 Passport.TextChanged += this.Search;
                 this.PTSMask.Child = PTS;
@@ -55,7 +56,7 @@ namespace GIBDD.RegisterAuto
                 MessageUtilites.Error(ex.Message, ex.HResult);
             }
         }
-
+        //Поиск региона
         private void Search(object sender, KeyEventArgs e)
         {
             long ID = 0;
@@ -81,6 +82,7 @@ namespace GIBDD.RegisterAuto
                 var Driver = context.Drivers.Where(i => i.passport == passport);
                 if (Driver.Count() > 0)
                 {
+                    GetDrivers = Driver.FirstOrDefault();
                     this.FirstName.Text = Driver.FirstOrDefault().FirstName;
                     this.LastName.Text = Driver.FirstOrDefault().LastName;
                     this.MiddleName.Text = Driver.FirstOrDefault().MiddleName;
@@ -92,6 +94,7 @@ namespace GIBDD.RegisterAuto
                 }
                 else
                 {
+                    GetDrivers = null;
                     this.FirstName.IsEnabled = true;
                     this.LastName.IsEnabled = true;
                     this.MiddleName.IsEnabled = true;
@@ -115,7 +118,52 @@ namespace GIBDD.RegisterAuto
         //Принять введенные данные
         private void Acсept(object sender, RoutedEventArgs e)
         {
-
+            if (this.LastName.Text != "" &&
+                this.FirstName.Text != "" &&
+                this.MiddleName.Text != "" &&
+                this.DateOfBirth.SelectedDate != null &&
+                this.VIN.Text.Length == VIN.Mask.Length ||
+                this.PTS.Text.Length == PTS.Mask.Length &&
+                this.Passport.Text.Length == Passport.Mask.Length &&
+                this.Region.SelectedItem != null)
+            {
+                var result = MessageBox.Show("Вы уверены, что хотите отправить заявление", "Вопрос", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    if (GetDrivers is null)
+                    {
+                        Drivers drivers = new Drivers
+                        {
+                            FirstName = FirstName.Text,
+                            LastName = LastName.Text,
+                            MiddleName = MiddleName.Text,
+                            DateOfBirth = (DateTime)DateOfBirth.SelectedDate
+                        };
+                        context.Drivers.Add(drivers);
+                        context.SaveChanges();
+                        GetDrivers = drivers;
+                      
+                    }
+                   
+                    Cars cars = new Cars()
+                    {
+                        Number = NumberGenerator.GetNumber(),
+                        PTS = this.PTS.Text.Replace(" ", ""),
+                        Region = this.Regions[this.Region.SelectedIndex].IDRegion,
+                        VIN = this.VIN.Text
+                    };
+                    context.Cars.Add(cars);
+                    this.context.SaveChanges();
+                    this.context.DriverCars.Add(new DriverCars { IDDriver = GetDrivers.IDDrivers, IDCar = cars.IDCar });
+                    this.context.SaveChanges();
+                    MessageBox.Show("Запись добавлена", "Инфо", MessageBoxButton.OK, MessageBoxImage.Information);
+                    NavigationService.GoBack();
+                }
+            }
+            else
+            {
+                MessageUtilites.Warning("Заполните обязательные поля отмеченные(*)");
+            }
         }
     }
 }

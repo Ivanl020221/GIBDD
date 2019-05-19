@@ -23,10 +23,10 @@
         <Button Click="GoToInfo" >
             Перечнь документов для регистрации авто
         </Button>
-        <Button Grid.Column="1">
+        <Button Grid.Column="1" Click="GoToFine">
             Мои штрафы
         </Button>
-        <Button Grid.Row="1">
+        <Button Grid.Row="1" Click="GoToIincense">
             Перечень документов для получения прав
         </Button>
         <Button Grid.Row="1" Grid.Column="1">

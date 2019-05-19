@@ -28,6 +28,8 @@ namespace GIBDD.Model
         public string GIBDDNumber { get; set; }
         public Nullable<long> Driver { get; set; }
         public byte[] Photo { get; set; }
+        public string RegionBirth { get; set; }
+        public Nullable<bool> Old { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Categorylicense> Categorylicense { get; set; }

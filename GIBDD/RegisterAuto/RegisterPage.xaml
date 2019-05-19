@@ -7,7 +7,7 @@
       xmlns:wpf="http://schemas.microsoft.com/netfx/2007/xaml/presentation"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="RegisterPage">
+      Title="Регистрация авто">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -57,7 +57,7 @@
                     <ColumnDefinition/>
                     <ColumnDefinition Width="0.4*"/>
                 </Grid.ColumnDefinitions>
-                <GroupBox Header="Регион">
+                <GroupBox Header="Регион*">
                     <ComboBox IsEditable="True" Name="Region" MaxDropDownHeight="200">
                     </ComboBox>
                 </GroupBox>

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GIBDD", "GIBDD\GIBDD.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilitesLibruary", "UtilitesLibruary\UtilitesLibruary.csproj", "{A16EC914-A7E4-4B05-B209-C1F0F30D6F74}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Media", "Media\Media.csproj", "{055D8886-58E8-4B21-80B1-57588761D1AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A16EC914-A7E4-4B05-B209-C1F0F30D6F74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A16EC914-A7E4-4B05-B209-C1F0F30D6F74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A16EC914-A7E4-4B05-B209-C1F0F30D6F74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{055D8886-58E8-4B21-80B1-57588761D1AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{055D8886-58E8-4B21-80B1-57588761D1AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{055D8886-58E8-4B21-80B1-57588761D1AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{055D8886-58E8-4B21-80B1-57588761D1AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
