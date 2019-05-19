@@ -4,25 +4,29 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="be6201ae0f644adcb8ad253ebb862e52" Name="Diagram1">
-        <EntityTypeShape EntityType="GIBDDModel.Cars" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="GIBDDModel.Category" Width="1.5" PointX="10.5" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GIBDDModel.Categorylicense" Width="1.5" PointX="12.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GIBDDModel.District" Width="1.5" PointX="0.75" PointY="12" IsExpanded="true" />
-        <EntityTypeShape EntityType="GIBDDModel.DriverCars" Width="1.5" PointX="7.5" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GIBDDModel.Drivers" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GIBDDModel.Driving_license" Width="1.5" PointX="10.5" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="GIBDDModel.Fine" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="GIBDDModel.FinesDriver" Width="1.5" PointX="7.5" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GIBDDModel.Media" Width="1.5" PointX="7.5" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="GIBDDModel.MediaType" Width="1.5" PointX="5.25" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GIBDDModel.Offence" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+      <Diagram DiagramId="738b985a2a794784ab0bb0efccda899e" Name="Diagram1">
+        <EntityTypeShape EntityType="GIBDDModel.Cars" Width="1.5" PointX="5.25" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GIBDDModel.Category" Width="1.5" PointX="10.5" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GIBDDModel.Categorylicense" Width="1.5" PointX="12.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GIBDDModel.District" Width="1.5" PointX="0.75" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GIBDDModel.DriverCars" Width="1.5" PointX="7.5" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GIBDDModel.Drivers" Width="1.5" PointX="5.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GIBDDModel.Driving_license" Width="1.5" PointX="10.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GIBDDModel.Fine" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="GIBDDModel.FinesDriver" Width="1.5" PointX="7.5" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GIBDDModel.Media" Width="1.5" PointX="7.5" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GIBDDModel.MediaType" Width="1.5" PointX="5.25" PointY="23.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GIBDDModel.Offence" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="GIBDDModel.OffencePunishment" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GIBDDModel.Punishment" Width="1.5" PointX="3" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GIBDDModel.Region" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="GIBDDModel.Roles" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
-        <EntityTypeShape EntityType="GIBDDModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GIBDDModel.Users" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GIBDDModel.Punishment" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GIBDDModel.Region" Width="1.5" PointX="3" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GIBDDModel.Request" Width="1.5" PointX="7.5" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="GIBDDModel.Roles" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GIBDDModel.Status" Width="1.5" PointX="5.25" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GIBDDModel.sysdiagrams" Width="1.5" PointX="9.75" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GIBDDModel.typeFine" Width="1.5" PointX="3" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="GIBDDModel.TypeRequest" Width="1.5" PointX="5.25" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GIBDDModel.Users" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
         <AssociationConnector Association="GIBDDModel.FK_Cars_Region" ManuallyRouted="false" />
         <AssociationConnector Association="GIBDDModel.FK_DriverCars_Cars" ManuallyRouted="false" />
         <AssociationConnector Association="GIBDDModel.FK_Categorylicense_Category" ManuallyRouted="false" />
@@ -32,13 +36,17 @@
         <AssociationConnector Association="GIBDDModel.FK_Drivers_Users" ManuallyRouted="false" />
         <AssociationConnector Association="GIBDDModel.FK_Driving_license_Drivers" ManuallyRouted="false" />
         <AssociationConnector Association="GIBDDModel.FK_FinesDriver_Drivers" ManuallyRouted="false" />
+        <AssociationConnector Association="GIBDDModel.FK_Request_Drivers" ManuallyRouted="false" />
         <AssociationConnector Association="GIBDDModel.FK_Driving_license_Region" ManuallyRouted="false" />
         <AssociationConnector Association="GIBDDModel.FK_Fine_Offence" ManuallyRouted="false" />
+        <AssociationConnector Association="GIBDDModel.FK_Fine_typeFine" ManuallyRouted="false" />
         <AssociationConnector Association="GIBDDModel.FK_FinesDriver_Fine" ManuallyRouted="false" />
         <AssociationConnector Association="GIBDDModel.FK_Media_Fine1" ManuallyRouted="false" />
         <AssociationConnector Association="GIBDDModel.FK_Media_MediaType" ManuallyRouted="false" />
         <AssociationConnector Association="GIBDDModel.FK_OffencePunishment_Offence" ManuallyRouted="false" />
         <AssociationConnector Association="GIBDDModel.FK_OffencePunishment_Punishment" ManuallyRouted="false" />
+        <AssociationConnector Association="GIBDDModel.FK_Request_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="GIBDDModel.FK_Request_TypeRequest" ManuallyRouted="false" />
         <AssociationConnector Association="GIBDDModel.FK_Users_Roles" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

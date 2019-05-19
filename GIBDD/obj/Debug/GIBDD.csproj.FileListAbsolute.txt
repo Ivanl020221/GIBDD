@@ -45,3 +45,5 @@ C:\Users\DELL\source\repos\GIBDD\GIBDD\obj\Debug\Fine\PayWindow.g.cs
 C:\Users\DELL\source\repos\GIBDD\GIBDD\obj\Debug\Fine\PayWindow.baml
 C:\Users\DELL\source\repos\GIBDD\GIBDD\obj\Debug\RulesTest\TestPage.g.cs
 C:\Users\DELL\source\repos\GIBDD\GIBDD\obj\Debug\RulesTest\TestPage.baml
+C:\Users\DELL\source\repos\GIBDD\GIBDD\obj\Debug\Request\Request.g.cs
+C:\Users\DELL\source\repos\GIBDD\GIBDD\obj\Debug\Request\Request.baml

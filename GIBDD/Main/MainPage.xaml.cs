@@ -63,5 +63,18 @@ namespace GIBDD.Main
                 MessageUtilites.Error(ex.Message, ex.HResult);
             }
         }
+
+        //Переход на страницу подтверждения заявок
+        private void GoToRequest(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                NavigationService.Navigate(new Request.Request());
+            }
+            catch (Exception ex)
+            {
+                MessageUtilites.Error(ex.Message, ex.HResult);
+            }
+        }
     }
 }

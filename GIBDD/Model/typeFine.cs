@@ -12,27 +12,18 @@ namespace GIBDD.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Fine
+    public partial class typeFine
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Fine()
+        public typeFine()
         {
-            this.FinesDriver = new HashSet<FinesDriver>();
-            this.Media = new HashSet<Media>();
+            this.Fine = new HashSet<Fine>();
         }
     
-        public long FineNuber { get; set; }
-        public System.DateTime Date { get; set; }
-        public bool pay { get; set; }
-        public long Offence { get; set; }
-        public Nullable<double> Sum { get; set; }
-        public Nullable<long> type { get; set; }
+        public long IDType { get; set; }
+        public string Name { get; set; }
     
-        public virtual Offence Offence1 { get; set; }
-        public virtual typeFine typeFine { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FinesDriver> FinesDriver { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Media> Media { get; set; }
+        public virtual ICollection<Fine> Fine { get; set; }
     }
 }

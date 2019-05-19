@@ -84,6 +84,7 @@
           <ScalarProperty Name="pay" ColumnName="pay" />
           <ScalarProperty Name="Offence" ColumnName="Offence" />
           <ScalarProperty Name="Sum" ColumnName="Sum" />
+          <ScalarProperty Name="type" ColumnName="type" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -149,10 +150,29 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Request">
+      <EntityTypeMapping TypeName="GIBDDModel.Request">
+        <MappingFragment StoreEntitySet="Request">
+          <ScalarProperty Name="IDRequest" ColumnName="IDRequest" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Driver" ColumnName="Driver" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="TypeRequest" ColumnName="TypeRequest" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Roles">
       <EntityTypeMapping TypeName="GIBDDModel.Roles">
         <MappingFragment StoreEntitySet="Roles">
           <ScalarProperty Name="IDRole" ColumnName="IDRole" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Status">
+      <EntityTypeMapping TypeName="GIBDDModel.Status">
+        <MappingFragment StoreEntitySet="Status">
+          <ScalarProperty Name="Status1" ColumnName="Status" />
           <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -165,6 +185,22 @@
           <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
           <ScalarProperty Name="version" ColumnName="version" />
           <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="typeFine">
+      <EntityTypeMapping TypeName="GIBDDModel.typeFine">
+        <MappingFragment StoreEntitySet="typeFine">
+          <ScalarProperty Name="IDType" ColumnName="IDType" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypeRequest">
+      <EntityTypeMapping TypeName="GIBDDModel.TypeRequest">
+        <MappingFragment StoreEntitySet="TypeRequest">
+          <ScalarProperty Name="IdTypeRequset" ColumnName="IdTypeRequset" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

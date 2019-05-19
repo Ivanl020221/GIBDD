@@ -82,6 +82,7 @@
           <Property Name="pay" Type="bit" Nullable="false" />
           <Property Name="Offence" Type="bigint" Nullable="false" />
           <Property Name="Sum" Type="float" />
+          <Property Name="type" Type="bigint" />
         </EntityType>
         <EntityType Name="FinesDriver">
           <Key>
@@ -138,11 +139,28 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
           <Property Name="District" Type="bigint" />
         </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="IDRequest" />
+          </Key>
+          <Property Name="IDRequest" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" />
+          <Property Name="Driver" Type="bigint" />
+          <Property Name="Status" Type="bigint" />
+          <Property Name="TypeRequest" Type="bigint" />
+        </EntityType>
         <EntityType Name="Roles">
           <Key>
             <PropertyRef Name="IDRole" />
           </Key>
           <Property Name="IDRole" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Status" />
+          </Key>
+          <Property Name="Status" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -154,6 +172,20 @@
           <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="typeFine">
+          <Key>
+            <PropertyRef Name="IDType" />
+          </Key>
+          <Property Name="IDType" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TypeRequest">
+          <Key>
+            <PropertyRef Name="IdTypeRequset" />
+          </Key>
+          <Property Name="IdTypeRequset" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -284,6 +316,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Fine_typeFine">
+          <End Role="typeFine" Type="Self.typeFine" Multiplicity="0..1" />
+          <End Role="Fine" Type="Self.Fine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="typeFine">
+              <PropertyRef Name="IDType" />
+            </Principal>
+            <Dependent Role="Fine">
+              <PropertyRef Name="type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_FinesDriver_Drivers">
           <End Role="Drivers" Type="Self.Drivers" Multiplicity="1" />
           <End Role="FinesDriver" Type="Self.FinesDriver" Multiplicity="*" />
@@ -370,6 +414,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Request_Drivers">
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="0..1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="IDDrivers" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="Driver" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Request_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Status" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Request_TypeRequest">
+          <End Role="TypeRequest" Type="Self.TypeRequest" Multiplicity="0..1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeRequest">
+              <PropertyRef Name="IdTypeRequset" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="TypeRequest" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Users_Roles">
           <End Role="Roles" Type="Self.Roles" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -400,8 +480,12 @@
           <EntitySet Name="OffencePunishment" EntityType="Self.OffencePunishment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Punishment" EntityType="Self.Punishment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Request" EntityType="Self.Request" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="typeFine" EntityType="Self.typeFine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeRequest" EntityType="Self.TypeRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Cars_Region" Association="Self.FK_Cars_Region">
             <End Role="Region" EntitySet="Region" />
@@ -439,6 +523,10 @@
             <End Role="Offence" EntitySet="Offence" />
             <End Role="Fine" EntitySet="Fine" />
           </AssociationSet>
+          <AssociationSet Name="FK_Fine_typeFine" Association="Self.FK_Fine_typeFine">
+            <End Role="typeFine" EntitySet="typeFine" />
+            <End Role="Fine" EntitySet="Fine" />
+          </AssociationSet>
           <AssociationSet Name="FK_FinesDriver_Drivers" Association="Self.FK_FinesDriver_Drivers">
             <End Role="Drivers" EntitySet="Drivers" />
             <End Role="FinesDriver" EntitySet="FinesDriver" />
@@ -466,6 +554,18 @@
           <AssociationSet Name="FK_Region_District" Association="Self.FK_Region_District">
             <End Role="District" EntitySet="District" />
             <End Role="Region" EntitySet="Region" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Request_Drivers" Association="Self.FK_Request_Drivers">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Request_Status" Association="Self.FK_Request_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Request_TypeRequest" Association="Self.FK_Request_TypeRequest">
+            <End Role="TypeRequest" EntitySet="TypeRequest" />
+            <End Role="Request" EntitySet="Request" />
           </AssociationSet>
           <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
             <End Role="Roles" EntitySet="Roles" />
@@ -541,6 +641,7 @@
           <NavigationProperty Name="Users" Relationship="Self.FK_Drivers_Users" FromRole="Drivers" ToRole="Users" />
           <NavigationProperty Name="Driving_license" Relationship="Self.FK_Driving_license_Drivers" FromRole="Drivers" ToRole="Driving_license" />
           <NavigationProperty Name="FinesDriver" Relationship="Self.FK_FinesDriver_Drivers" FromRole="Drivers" ToRole="FinesDriver" />
+          <NavigationProperty Name="Request" Relationship="Self.FK_Request_Drivers" FromRole="Drivers" ToRole="Request" />
         </EntityType>
         <EntityType Name="Driving_license">
           <Key>
@@ -569,7 +670,9 @@
           <Property Name="pay" Type="Boolean" Nullable="false" />
           <Property Name="Offence" Type="Int64" Nullable="false" />
           <Property Name="Sum" Type="Double" />
+          <Property Name="type" Type="Int64" />
           <NavigationProperty Name="Offence1" Relationship="Self.FK_Fine_Offence" FromRole="Fine" ToRole="Offence" />
+          <NavigationProperty Name="typeFine" Relationship="Self.FK_Fine_typeFine" FromRole="Fine" ToRole="typeFine" />
           <NavigationProperty Name="FinesDriver" Relationship="Self.FK_FinesDriver_Fine" FromRole="Fine" ToRole="FinesDriver" />
           <NavigationProperty Name="Media" Relationship="Self.FK_Media_Fine1" FromRole="Fine" ToRole="Media" />
         </EntityType>
@@ -641,6 +744,19 @@
           <NavigationProperty Name="District1" Relationship="Self.FK_Region_District" FromRole="Region" ToRole="District" />
           <NavigationProperty Name="Driving_license" Relationship="Self.FK_Driving_license_Region" FromRole="Region" ToRole="Driving_license" />
         </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="IDRequest" />
+          </Key>
+          <Property Name="IDRequest" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="Driver" Type="Int64" />
+          <Property Name="Status" Type="Int64" />
+          <Property Name="TypeRequest" Type="Int64" />
+          <NavigationProperty Name="Drivers" Relationship="Self.FK_Request_Drivers" FromRole="Request" ToRole="Drivers" />
+          <NavigationProperty Name="Status1" Relationship="Self.FK_Request_Status" FromRole="Request" ToRole="Status" />
+          <NavigationProperty Name="TypeRequest1" Relationship="Self.FK_Request_TypeRequest" FromRole="Request" ToRole="TypeRequest" />
+        </EntityType>
         <EntityType Name="Roles">
           <Key>
             <PropertyRef Name="IDRole" />
@@ -648,6 +764,14 @@
           <Property Name="IDRole" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Users_Roles" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Status1" />
+          </Key>
+          <Property Name="Status1" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Request" Relationship="Self.FK_Request_Status" FromRole="Status" ToRole="Request" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -658,6 +782,22 @@
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="typeFine">
+          <Key>
+            <PropertyRef Name="IDType" />
+          </Key>
+          <Property Name="IDType" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Fine" Relationship="Self.FK_Fine_typeFine" FromRole="typeFine" ToRole="Fine" />
+        </EntityType>
+        <EntityType Name="TypeRequest">
+          <Key>
+            <PropertyRef Name="IdTypeRequset" />
+          </Key>
+          <Property Name="IdTypeRequset" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Request" Relationship="Self.FK_Request_TypeRequest" FromRole="TypeRequest" ToRole="Request" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -790,6 +930,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Request_Drivers">
+          <End Role="Drivers" Type="Self.Drivers" Multiplicity="0..1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Drivers">
+              <PropertyRef Name="IDDrivers" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="Driver" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Driving_license_Region">
           <End Role="Region" Type="Self.Region" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -813,6 +965,18 @@
             </Principal>
             <Dependent Role="Fine">
               <PropertyRef Name="Offence" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fine_typeFine">
+          <End Role="typeFine" Type="Self.typeFine" Multiplicity="0..1" />
+          <End Role="Fine" Type="Self.Fine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="typeFine">
+              <PropertyRef Name="IDType" />
+            </Principal>
+            <Dependent Role="Fine">
+              <PropertyRef Name="type" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -876,6 +1040,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Request_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="Status1" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Request_TypeRequest">
+          <End Role="TypeRequest" Type="Self.TypeRequest" Multiplicity="0..1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeRequest">
+              <PropertyRef Name="IdTypeRequset" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="TypeRequest" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Users_Roles">
           <End Role="Roles" Type="Self.Roles" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -906,8 +1094,12 @@
           <EntitySet Name="OffencePunishment" EntityType="Self.OffencePunishment" />
           <EntitySet Name="Punishment" EntityType="Self.Punishment" />
           <EntitySet Name="Region" EntityType="Self.Region" />
+          <EntitySet Name="Request" EntityType="Self.Request" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="typeFine" EntityType="Self.typeFine" />
+          <EntitySet Name="TypeRequest" EntityType="Self.TypeRequest" />
           <EntitySet Name="Users" EntityType="Self.Users" />
           <AssociationSet Name="FK_Cars_Region" Association="Self.FK_Cars_Region">
             <End Role="Region" EntitySet="Region" />
@@ -945,12 +1137,20 @@
             <End Role="Drivers" EntitySet="Drivers" />
             <End Role="FinesDriver" EntitySet="FinesDriver" />
           </AssociationSet>
+          <AssociationSet Name="FK_Request_Drivers" Association="Self.FK_Request_Drivers">
+            <End Role="Drivers" EntitySet="Drivers" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
           <AssociationSet Name="FK_Driving_license_Region" Association="Self.FK_Driving_license_Region">
             <End Role="Region" EntitySet="Region" />
             <End Role="Driving_license" EntitySet="Driving_license" />
           </AssociationSet>
           <AssociationSet Name="FK_Fine_Offence" Association="Self.FK_Fine_Offence">
             <End Role="Offence" EntitySet="Offence" />
+            <End Role="Fine" EntitySet="Fine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fine_typeFine" Association="Self.FK_Fine_typeFine">
+            <End Role="typeFine" EntitySet="typeFine" />
             <End Role="Fine" EntitySet="Fine" />
           </AssociationSet>
           <AssociationSet Name="FK_FinesDriver_Fine" Association="Self.FK_FinesDriver_Fine">
@@ -972,6 +1172,14 @@
           <AssociationSet Name="FK_OffencePunishment_Punishment" Association="Self.FK_OffencePunishment_Punishment">
             <End Role="Punishment" EntitySet="Punishment" />
             <End Role="OffencePunishment" EntitySet="OffencePunishment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Request_Status" Association="Self.FK_Request_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Request_TypeRequest" Association="Self.FK_Request_TypeRequest">
+            <End Role="TypeRequest" EntitySet="TypeRequest" />
+            <End Role="Request" EntitySet="Request" />
           </AssociationSet>
           <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
             <End Role="Roles" EntitySet="Roles" />
@@ -1067,6 +1275,7 @@
                 <ScalarProperty Name="pay" ColumnName="pay" />
                 <ScalarProperty Name="Offence" ColumnName="Offence" />
                 <ScalarProperty Name="Sum" ColumnName="Sum" />
+                <ScalarProperty Name="type" ColumnName="type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1132,10 +1341,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Request">
+            <EntityTypeMapping TypeName="GIBDDModel.Request">
+              <MappingFragment StoreEntitySet="Request">
+                <ScalarProperty Name="IDRequest" ColumnName="IDRequest" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Driver" ColumnName="Driver" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TypeRequest" ColumnName="TypeRequest" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Roles">
             <EntityTypeMapping TypeName="GIBDDModel.Roles">
               <MappingFragment StoreEntitySet="Roles">
                 <ScalarProperty Name="IDRole" ColumnName="IDRole" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="GIBDDModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="Status1" ColumnName="Status" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1148,6 +1376,22 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="typeFine">
+            <EntityTypeMapping TypeName="GIBDDModel.typeFine">
+              <MappingFragment StoreEntitySet="typeFine">
+                <ScalarProperty Name="IDType" ColumnName="IDType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeRequest">
+            <EntityTypeMapping TypeName="GIBDDModel.TypeRequest">
+              <MappingFragment StoreEntitySet="TypeRequest">
+                <ScalarProperty Name="IdTypeRequset" ColumnName="IdTypeRequset" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

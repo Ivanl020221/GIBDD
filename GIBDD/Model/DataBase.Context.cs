@@ -40,8 +40,12 @@ namespace GIBDD.Model
         public virtual DbSet<OffencePunishment> OffencePunishment { get; set; }
         public virtual DbSet<Punishment> Punishment { get; set; }
         public virtual DbSet<Region> Region { get; set; }
+        public virtual DbSet<Request> Request { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
+        public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<typeFine> typeFine { get; set; }
+        public virtual DbSet<TypeRequest> TypeRequest { get; set; }
         public virtual DbSet<Users> Users { get; set; }
     }
 }

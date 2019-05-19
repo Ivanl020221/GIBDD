@@ -20,6 +20,7 @@ namespace GIBDD.Model
             this.DriverCars = new HashSet<DriverCars>();
             this.Driving_license = new HashSet<Driving_license>();
             this.FinesDriver = new HashSet<FinesDriver>();
+            this.Request = new HashSet<Request>();
         }
     
         public long IDDrivers { get; set; }
@@ -37,5 +38,7 @@ namespace GIBDD.Model
         public virtual ICollection<Driving_license> Driving_license { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FinesDriver> FinesDriver { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Request> Request { get; set; }
     }
 }

@@ -18,6 +18,22 @@
             <WindowsFormsHost Name="IicenseMask" FontSize="20"/>
         </GroupBox>
         <Frame Grid.Row="1" Name="IicenseFrame"/>
-        <Button Grid.Row="2" Width="200">Перевыпуск</Button>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+        <Button Grid.Row="2" HorizontalAlignment="Left" Click="GetNew" Name="Gifts" IsEnabled="False">Перевыпуск</Button>
+            <GroupBox Header="Причина" Grid.Column="1">
+            <ComboBox SelectedIndex="0" Name="TypeReq" Grid.Column="1" DisplayMemberPath="Name" IsEnabled="False">
+            </ComboBox>
+                
+            </GroupBox>
+
+        <TextBlock Name="status" Grid.Column="2"/>
+        <Button Name="OkRequest" Grid.Column="3" HorizontalAlignment="Right"  IsEnabled="False" Click="EventReq"/>
+        </Grid>
     </Grid>
 </Page>

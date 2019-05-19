@@ -21,11 +21,13 @@ namespace GIBDD.RulesTest
     /// </summary>
     public partial class TestPage : Page
     {
-        string[] files = new string[] 
+        string[] files = new string[]
         {
-            @"C:\Users\DELL\source\repos\GIBDD\GIBDD\Resourses\Convertible-Car-Transparent.png",
-            @"C:\Users\DELL\source\repos\GIBDD\GIBDD\Resourses\gibdd.png",
-            @"C:\Users\DELL\source\repos\GIBDD\GIBDD\Resourses\null.png"
+            @"C:\Users\DELL\source\repos\GIBDD\GIBDD\RulesTest\ImageTest\3-30-stoyanka-zapreshtena-po-chiotnym-chislam-mesyatsa.png",
+            @"C:\Users\DELL\source\repos\GIBDD\GIBDD\RulesTest\ImageTest\4.1.5.png",
+            @"C:\Users\DELL\source\repos\GIBDD\GIBDD\RulesTest\ImageTest\hello_html_m207c7853.jpg",
+            @"C:\Users\DELL\source\repos\GIBDD\GIBDD\RulesTest\ImageTest\Ukraine_road_sign_3.36.gif",
+            @"C:\Users\DELL\source\repos\GIBDD\GIBDD\RulesTest\ImageTest\Ukraine_road_sign_4.4.gif"
         };
         Image Global;
         //Инициализация копонетов

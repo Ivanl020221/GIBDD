@@ -16,31 +16,24 @@
         <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled">
             <StackPanel Orientation="Horizontal" Name="Signs"/>
         </ScrollViewer>
-        <WrapPanel Grid.Row="1">
-            <GroupBox Header="Вопрос 1" >
-                <Image AllowDrop="True" Drop="DropImage" HorizontalAlignment="Right" Margin="0,0,-0.4,0.2" Width="66" Source="/GIBDD;component/Resourses/null.png"></Image>
-            </GroupBox>
-            <GroupBox Header="Вопрос 2">
-                <Image AllowDrop="True" Drop="DropImage" Source="/GIBDD;component/Resourses/null.png"></Image>
-            </GroupBox>
-            <GroupBox Header="Вопрос 3">
-                <Image AllowDrop="True" Drop="DropImage" Source="/GIBDD;component/Resourses/null.png"></Image>
-            </GroupBox>
-            <GroupBox Header="Вопрос 4">
-                <Image AllowDrop="True" Drop="DropImage" Source="/GIBDD;component/Resourses/null.png"></Image>
-            </GroupBox>
-            <GroupBox Header="Вопрос 5">
-                <Image AllowDrop="True" Drop="DropImage" Source="/GIBDD;component/Resourses/null.png"></Image>
-            </GroupBox>
-            <GroupBox Header="Вопрос 6">
-                <Image AllowDrop="True" Drop="DropImage" Source="/GIBDD;component/Resourses/null.png"></Image>
-            </GroupBox>
-            <GroupBox Header="Вопрос 7">
-                <Image AllowDrop="True" Drop="DropImage" Source="/GIBDD;component/Resourses/null.png"></Image>
-            </GroupBox>
-            <GroupBox Header="Вопрос 8">
-                <Image AllowDrop="True" Drop="DropImage" Source="/GIBDD;component/Resourses/null.png"></Image>
-            </GroupBox>
-        </WrapPanel>
+        <ScrollViewer Grid.Row="1">
+            <WrapPanel Grid.Row="1">
+                <GroupBox Header="Стоянка заперещена"  Height="200">
+                    <Image AllowDrop="True" Drop="DropImage" HorizontalAlignment="Right" Margin="0,0,-0.4,0.2"  Source="/GIBDD;component/Resourses/null.png"></Image>
+                </GroupBox>
+                <GroupBox Header="Поворот налево"  Height="200">
+                    <Image AllowDrop="True" Drop="DropImage" Source="/GIBDD;component/Resourses/null.png"></Image>
+                </GroupBox>
+                <GroupBox Header="Пешеходный переход"  Height="200">
+                    <Image AllowDrop="True" Drop="DropImage" Source="/GIBDD;component/Resourses/null.png"></Image>
+                </GroupBox>
+                <GroupBox Header="Поворот направо"  Height="200">
+                    <Image AllowDrop="True" Drop="DropImage" Source="/GIBDD;component/Resourses/null.png"></Image>
+                </GroupBox>
+                <GroupBox Header="Стоянка запрещена"  Height="200">
+                    <Image AllowDrop="True" Drop="DropImage" Source="/GIBDD;component/Resourses/null.png"></Image>
+                </GroupBox>
+            </WrapPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

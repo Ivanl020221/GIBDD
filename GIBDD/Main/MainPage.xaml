@@ -29,8 +29,8 @@
         <Button Grid.Row="1" Click="GoToIincense">
             Перечень документов для получения прав
         </Button>
-        <Button Grid.Row="1" Grid.Column="1">
-            Список правонарушений
+        <Button Grid.Row="1" Grid.Column="1" Click="GoToRequest">
+            Подтвержение заявок
         </Button>
     </Grid>
 </Page> 

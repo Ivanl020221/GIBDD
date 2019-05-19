@@ -47,6 +47,6 @@
                 </Button>
             </Grid>
         </Border>
-        <Frame Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" Source="/GIBDD;component/RulesTest/TestPage.xaml"/>
+        <Frame Name="MainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" Source="/GIBDD;component/Main/MainPage.xaml"/>
     </Grid>
 </Window>
